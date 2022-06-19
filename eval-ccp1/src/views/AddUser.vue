@@ -44,14 +44,20 @@ export default {
       this.sortObject(this.userDatas);
       this.newUser = {...myArray};
       this.$store.commit('addUser',this.newUser);
-      this.idAjoute = await UserDataService.createUser({
+      console.log("new user : ", this.newUser);
+      await UserDataService.createUser({
             usrname: this.newUser.usrname,
             username: this.newUser.username,
             email: this.newUser.email,
             phone: this.newUser.phone,
-            website: this.newUser.website
+            website: this.newUser.website,
+            street: this.newUser.street,
+            city: this.newUser.city,
+            zipcode: this.newUser.zipcode,
+            company_name: this.newUser.company_name,
+            catch_phrase: this.newUser.catch_phrase,
+            business: this.newUser.business,
       });
-      console.log("id ajouté : ",this.idAjoute);
       this.$router.push("/users");
     },
   }

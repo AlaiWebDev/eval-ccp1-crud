@@ -24,7 +24,13 @@
             "username" => $item->username,
             "email" => $item->email,
             "phone" => $item->phone,
-            "website" => $item->website
+            "website" => $item->website,
+            "street" => $item->street,
+            "city" => $item->city,
+            "zipcode" => $item->zipcode,
+            "company_name" => $item->company_name,
+            "catch_phrase" => $item->catch_phrase,
+            "business" => $item->business,
         );
       
         http_response_code(200);

@@ -29,7 +29,13 @@
                 "username" => $username,
                 "email" => $email,
                 "phone" => $phone,
-                "website" => $website
+                "website" => $website,
+                "street" => $street,
+                "city" => $city,
+                "zipcode" => $zipcode,
+                "company_name" => $company_name,
+                "catch_phrase" => $catch_phrase,
+                "business" => $business,
             );
 
             array_push($userArr, $e);

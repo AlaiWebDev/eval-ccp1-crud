@@ -21,9 +21,16 @@
     $item->email = $data->email;
     $item->phone = $data->phone;
     $item->website = $data->website;
+    $item->street = $data->street;
+    $item->city = $data->city;
+    $item->zipcode = $data->zipcode;
+    $item->company_name = $data->company_name;
+    $item->catch_phrase = $data->catch_phrase;
+    $item->business = $data->business;
       
     if($item->createUser()){
-        echo json_encode("User created.");
+        // $id = $db->lastInsertId();
+        echo json_encode($id);// permet d'envoyer l'ID qui a été ajouté en auto-increment pour plus tard implémenter les adresses et compagnies
     } else{
         echo json_encode("Failed to create user.");
     }

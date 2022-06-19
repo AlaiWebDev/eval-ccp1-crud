@@ -3,7 +3,11 @@
     <h1>Modification de l'utilisateur <span>{{ currentUser }}</span></h1>
     <form>
       <label v-for="(value, property, index) in userDatas" :key="index">
-        {{ property.toUpperCase() }}
+        <address v-if="property === 'street' || property === 'company_name'">
+          <span class="user-address-company">{{ property === "street" ? "ADDRESS" : "COMPANY" }}</span>
+          <span>{{ property.toUpperCase() }}</span>
+        </address>
+        <address v-else>{{ property.toUpperCase() }}</address>
         <input type="text" v-bind:value="value" :disabled="property === 'id'" v-bind:id="property">
       </label>
       <button v-on:click.prevent="majUser">Valider</button>
@@ -23,6 +27,7 @@ export default {
       userDatas: [],
       disabled: false,
       datasFromInput: [],
+      addressFields: ["street", "city", "zipcode"]
     }
   },
   methods: {
@@ -57,8 +62,12 @@ export default {
       "currentUser"
     ],
   beforeMount() {
-    this.userDatas = this.$store.state.users[(this.$store.state.users).findIndex(v => parseInt(v.id) === parseInt(this.id))];
-    this.$store.commit("setCurrentUser", this.userDatas);
+    // this.userDatas = this.$store.state.users[(this.$store.state.users).findIndex(v => parseInt(v.id) === parseInt(this.id))];
+    // this.$store.commit("setCurrentUser", this.userDatas);
+    UserDataService.retrieveUser(parseInt(this.id)).then((res) => {
+        this.userDatas = res.data;
+        console.log("retrieve user ", res.data);
+      });
   }
 }
 </script>
@@ -113,7 +122,22 @@ export default {
     padding-left: .5rem;
     resize: none;
   }
-
+  address {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .user-address-company {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding:1.3rem;
+    font-size: 1.3rem;
+    font-weight: bolder;
+    border-radius: 10px;
+    background-color: #4e7b7f;
+    border: 1px solid #000;
+  }
   #company {
     height: 70px;
   }

@@ -44,6 +44,7 @@ export default {
   margin: 0;
   padding: 0;
   font-size: 16px;
+  font-style: normal;
 }
 
   body {
