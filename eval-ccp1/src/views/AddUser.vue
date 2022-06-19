@@ -26,6 +26,7 @@ export default {
       datasFromTextarea: [],
       userDatas: [],
       newUser: {},
+      idAjoute: 0
     }
   },
   methods: {
@@ -43,13 +44,14 @@ export default {
       this.sortObject(this.userDatas);
       this.newUser = {...myArray};
       this.$store.commit('addUser',this.newUser);
-      await UserDataService.createUser({
+      this.idAjoute = await UserDataService.createUser({
             usrname: this.newUser.usrname,
             username: this.newUser.username,
             email: this.newUser.email,
             phone: this.newUser.phone,
             website: this.newUser.website
       });
+      console.log("id ajouté : ",this.idAjoute);
       this.$router.push("/users");
     },
   }
